@@ -21,7 +21,7 @@
     	<label>How did you meet your cat? What's the story?</label>
     	<br>
     	<textarea name="textarea" rows="10" cols="50">Write here</textarea>
-    	</textarea>
+    	
     </div>
     <div>
     	<label>Is your cat neutered?</label>
@@ -29,9 +29,29 @@
     	<input type="radio" name="health" value="No">No
     </div>
     <div>
-		<label>How much donation can you contribute?</label>
-		
+		  <label>Please enter your anonymous donation?</label>
+      <input type="password" name="donation">
+
     </div>
+
+     <div>
+      <fieldset>
+      <label>Why do you like cats? You can choose more than one.</label>
+      <br>
+            <input type="checkbox" name="reason" value="playful">Playful
+            <input type="checkbox" name="reason" value="cute">cute
+            <input type="checkbox" name="reason" value="good looking"> good looking
+            <input type="checkbox" name="reason" value="quiet">won`t disturb coding
+
+
+      </fieldset>
+
+
+
+
+
+     </div>
+
 <button type="submit">Submit!</button>
 </form>
 </body>
