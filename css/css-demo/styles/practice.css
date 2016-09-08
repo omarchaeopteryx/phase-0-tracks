@@ -1,0 +1,31 @@
+#contact-info {
+
+font-size:0.8em;
+}
+
+.job {
+
+background-color:#e9e6dc;
+border-radius:10px;
+padding:5px 10px 10px 20px;
+margin-top:10px;
+
+}
+
+.tasks {
+
+font-size:0.8em;
+
+}
+
+section.job:hover {
+
+background-color:yellow;
+
+}
+
+section h3{
+
+color:blue;
+
+}
