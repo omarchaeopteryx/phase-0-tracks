@@ -3,7 +3,7 @@ img#octopus {
 	margin-left:150px;
 	margin-top:10px;
 	z-index:-1
-
+/* putting z-index from lowest, middle, highest */
 }
 
 img#hat {
