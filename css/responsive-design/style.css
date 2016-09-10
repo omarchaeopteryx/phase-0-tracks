@@ -1,5 +1,19 @@
+/** { outline: 1px solid red; }*/
+
+body {
+    margin: 0 auto;
+    width: 75%;
+}
+
+main {
+  width: 75%;
+  display: inline-block;
+  vertical-align: top;
+  min-width: 25%;
+}
+
 blockquote {
-  border-left: 5px solid blue;
+  border-left: 5px solid green;
   padding: 15px;
   margin-left: 0px;
 }
@@ -9,9 +23,16 @@ cite {
   margin-top: 10px;
 }
 
+section#external-links{
+  width: 23%;
+  display: inline-block;
+}
+
 #external-links ul {
   list-style-type: none;
   padding-left: 0px;
+  min-width: 20%;
+  
 }
 
 /* you're welcome to edit the
@@ -30,3 +51,43 @@ figcaption {
   font-style: italic;
   text-align: right;
 }
+
+@media screen and (max-width: 600px) {
+  body {
+    background-color: green;
+    width: 95%;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+
+  ul {
+    font-size: .8em;
+  }
+
+  section#external-links {
+    max-width: ;
+    width: 25%;
+    vertical-align: left;
+      }
+
+  main {
+    width: 68%;
+    vertical-align: top;
+
+  }
+
+  @media screen and (max-width: 400px) {
+    section#external-links {
+      width: 100%;
+      vertical-align:bottom;
+      display: block;
+    }
+
+    main {
+      width: 100%;
+      display: block;
+      vertical-align: top;
+    }
+  }
