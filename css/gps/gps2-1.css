@@ -1,1 +1,26 @@
 /* This is a test: html {background-color:blue} */
+body {
+  max-width:950px;
+  font-family: Georgia;
+  background-color: purple; 
+  color: white;
+}
+header { 
+  border: 10px solid black; 
+  border-style: dashed; 
+}
+header:hover { 
+ background-image: url("https://assets-cdn.github.com/images/modules/logos_page/Octocat.png "); 
+}
+.column-1 {
+  background-color: darkorange;
+  display:inline-block;
+  width:49%;
+}
+
+.column-2 {
+  background-color:darkgreen;
+  display:inline-block;
+  width:49%;
+  vertical-align:top;
+}
