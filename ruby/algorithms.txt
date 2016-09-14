@@ -1,0 +1,30 @@
+# DBC Week 4, Challenge 4.2
+# Omar Malik
+# 09-14-2016
+
+4.2.1 - Task: Using an elevator
+
+- First ask which floor the rider is going to and remember as 'requested floor';
+- Scan the first number on the console, starting at top-left:
+    -- If the number matches the requested number, check if it's already lit up:
+      --- If the number isn't lit, press the button for the requested floor number.
+      --- If the number is lit, wait and check each floor until you reach that floor.
+    -- Else, move on to the next number in the console (below on list);
+    -- If you've reached the bottom of the console, start at the top of the next column;
+    -- Repeat until you find the requested floor number;
+- At the same time, check each floor you're on to see if it matches the requested floor;
+- If the floor you're on matches the requested floor, get off the elevator!
+
+4.2.2 - Task: Making morning coffee
+
+- If the coffee pot on the drip coffee machine is empty:
+  -- Fill pot with 4 cups of water;
+  -- Pour pot's water into the coffee-maker;
+      -- Until the coffee-maker's water level reads 4 cups, keep pouring;
+  -- Check if there are already coffee grounds in the basket:
+    --- If there are no grounds, add 5 scoops of ground coffee;
+    --- Else, put all of the used coffee grounds into compost.
+  -- Turn on the coffee-maker;
+- Else, if the pot wasn't empty to begin with, pour old coffee into glass and make iced coffee.
+
+***
