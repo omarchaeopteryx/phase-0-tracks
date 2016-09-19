@@ -67,23 +67,19 @@ while i < hires
   # UPDATE: One Last Question (that overrides the above)!
   puts "Final question - please list any allergies you have (enter as many as you have). Please type 'done' when finished."
 
-  allergies = []
   done = false
     until done == true
       allergen = gets.chomp
       if allergen == "sunshine"
         strike5 = true
         suspect = 2
-        allergies.push(allergen)
         done = true
         break
       elsif allergen == "done"
         suspect = suspect
-        allergies.push(allergen)
         done = true
       else
         suspect = suspect
-        allergies.push(allergen)
       end
     end
 
@@ -117,8 +113,7 @@ while i < hires
       suspect = 4
     end
   # Step: Finding final results here...
-  p "Suspect Level: "
-  p suspect
+  puts "Suspect Level: #{suspect}."
 
   if suspect == 1
       result = "Probably not a vampire."
@@ -134,7 +129,6 @@ while i < hires
 
   # Last step: storing and sharing the final results
   puts result
-  p allergies # For debugging
   master_list.push(result)
   puts "Next!"
   i = i+1
