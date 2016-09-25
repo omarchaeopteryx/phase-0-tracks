@@ -16,7 +16,7 @@ def name_prep(input)
   return output
 end
 
-puts "Welcome, Agent. What is your full name?"
+puts "Welcome, Agent. What are your first and last names?"
 full_user_name = gets.chomp
 full_user_record = []
 altered_user_name = name_prep(full_user_name)
@@ -79,12 +79,15 @@ end
 
 # Combining the letters of the names to combine them into strings!
 # Don't forget to upcase the .first and the .last either.
-r[0].first.upcase!
-r[1].first.upcase!
-new_first_name = r[0].join
-new_last_name = r[1].join
-new_total_name << "#{new_first_name} #{new_last_name}"
-
+p r
+# p r[0].first.upcase!
+# p first_cap = r[1].first
+# p first_cap.upcase!
+# p r[1][0] = first_cap
+p new_first_name = r[0].join.capitalize
+p new_last_name = r[1].join.capitalize
+p new_total_name << "#{new_first_name} #{new_last_name}"
+p new_total_name
 # Reading out the results!
 entry = "#{full_user_name} is: #{new_first_name} #{new_last_name}."
 full_user_record << entry
