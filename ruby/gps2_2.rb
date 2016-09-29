@@ -99,3 +99,18 @@ p remove_item(grocery_list,'lemonade')
 p update_quantity(grocery_list,'ice cream',1)
 
 print_list(grocery_list) # Printing the list
+
+# Release 2, updated code
+# Release 3, reflection (OM)
+
+# I learned that pseudocode can be difficult if you don't know how all the moving pieces are going to work together (for instance, the "output" here was to be determined depending on our later conclusions). I was also distracted by the previously existing pseudocode which used a style different from my own, and it made me realize that I prefer working from scratch sometimes so the thinking is not constrained by trying right away to meet given specifications.
+
+# The tradeoffs with arrays and hashes in my view are that, with an array, it's conceptually easier to think about looping through indexed items without knowing what the nature of the items are. With the hash, however, it's easier to query (and overwrite) without knowing where in your list or collection the items are. An array also has one variable to deal with at a time when manipulating it in looping code, and the hash needs two arguments.
+
+# A method returns the last object that you tell it to return. That object can be a variable, a string, or a list or an array, etc.
+
+# You can pass any object encountered so far into a method, provided that the steps within the method deal with that object appropriately. For instance, I was having difficulty bringing in an  array and trying to do a hash function to it -- conversely, trying to do a hash function and offering only one input (rather than two for key, value).
+
+# You can pass information between methods by by linking the input argument of one to the output return of another. In this case, the `grocery_list` object was manipulated in a lot of cases, but technically it was a new list each time within the method. But it was easier to keep track of becuase it would be returned by one method, and used as the input for another method (it's sort of like it handing of off, I'd say).
+
+# This challenge helped me to solidify my understanding of how hashes work and how to query them especially. I got a feel for using them rather like an array in the sense that they are indexed by items, which is analogous to being indexed by numbers, and so the syntaxes of the operations are comparable. I'm still having difficulty understanding when are the best cases to use iteration via code blocks (rather than a 'while' loop, for example) and in such cases, whether best to use .map or .each or another function. But perhaps it will become a more natural instinct with more exposure.
