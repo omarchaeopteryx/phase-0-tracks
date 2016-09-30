@@ -100,6 +100,51 @@ p update_quantity(grocery_list,'ice cream',1)
 
 print_list(grocery_list) # Printing the list
 
+# Update: Alternative Driver code
+#
+# puts "What items do you want to add to the list?"
+# input = gets.chomp
+#
+# # Release 2, testing solutions
+#
+# g# DRIVER CODE:
+#
+# puts "What items do you want to add to the list?"
+# input = gets.chomp
+#
+# # Release 2, testing solutions
+#
+# grocery_list = create_list(input)
+#
+# print_list(grocery_list)
+#
+# puts "Would you like to add any other items? (y/n)"
+# if gets.chomp.downcase == "y"
+#   puts "What would you like to add?"
+#   grocery_list.update(add_item(gets.chomp, 1))
+#   print_list(grocery_list)
+# end
+#
+# puts "Would you like to remove any items? (y/n)"
+# if gets.chomp == "y"
+#   puts "Which item would you like to remove?"
+#   remove_item(grocery_list,gets.chomp)
+#   print_list(grocery_list)
+# end
+#
+# puts "Would you like to change any quantities? (y/n)"
+# if gets.chomp.downcase == "y"
+#   puts "Which item?"
+#   response = gets.chomp
+#   puts "How many would you like?"
+#   new_quant = gets.chomp.to_i
+#   update_quantity(grocery_list, response, new_quant)
+# end
+#
+#
+# print_list(grocery_list) # Printing the list
+#
+
 # Release 2, updated code
 # Release 3, reflection (OM)
 
