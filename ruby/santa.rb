@@ -1,13 +1,13 @@
 # OM - DBC, Challenge 6.3
 
-# Creating a new class, Santa
+# Creating a new class: Santa!
 
 class Santa
-  attr_reader :ethnicity
+  attr_reader :ethnicity, :nickname
   attr_accessor :age, :gender # Note that accessor allows for both reading and writing, which means gender gets both getter and setter status
   # Release 2, adding getter methods
   #
-  @age = 0 # Defaults to zero, not passed on
+  @age = 0# Defaulted to zero, not passed on
   # Release 3, refactoring code with attr_reader and attr_accessor
 
   # def gender=(new_gender)
@@ -23,6 +23,7 @@ class Santa
   # end
 
 def initialize(gender,ethnicity,nickname)
+    @age = rand(1..140)
     @gender = gender # Takes value at initialiation
     @ethnicity = ethnicity
     @nickname = nickname
@@ -78,7 +79,7 @@ santas = [] # Updated sample code from 6.3 lesson
 example_genders = ["agender", "female", "bigender", "male", "female", "gender fluid", "robot", "N/A"]
 example_ethnicities = ["black", "Latino", "white", "Japanese-African", "prefer not to say", "Panjabi", "Bothan", "Mystical Creature (unicorn)", "N/A"]
 nickname = ["Santa Claus","Kris Kringle","Saint Nick", "Old St. Nick", "Sandy Claws", "Father Christmas","Pagan Nonsense", "Pere Noel"]
-
+random_age = rand(1..140)
 example_genders.length.times do |i|
   santas << Santa.new(example_genders[i], example_ethnicities[i],nickname[i])
 end
@@ -91,8 +92,25 @@ santas.each {|santa| p santa}
 
 # Release 2+, New driver code
 
-p my_santa = Santa.new("male","Afro-Caribbean",nickname[2])
-puts "Your Santa's age is: "; puts my_santa.age=(150)
-puts "Your Santa's ethnicity is: " + my_santa.ethnicity
-puts "You changed the gender to: " + my_santa.gender=("Unknown") # TRICKY: Had to change ".gender()" to ".gender=()" to get it to work!
-my_santa.get_mad_at("Prancer") # For some reason, it's breaking if not Vixen or Donner
+# p my_santa = Santa.new("male","Afro-Caribbean",nickname[2])
+# puts "Your Santa's age is: "; puts my_santa.age=(150)
+# puts "Your Santa's ethnicity is: " + my_santa.ethnicity
+# puts "You changed the gender to: " + my_santa.gender=("Unknown") # TRICKY: Had to change ".gender()" to ".gender=()" to get it to work!
+# my_santa.get_mad_at("Prancer")
+
+# Release 4, Making a whole bunch of Santas and printing out the list!
+
+crazy_santas = []
+
+50.times do
+  crazy_santas << Santa.new(example_genders.sample,example_ethnicities.sample,nickname.sample)
+  crazy_santas
+end
+
+puts "Here are the attendees of the SantaCon 2k16!
+*******************************************"
+crazy_santas.each {|santa| puts "#{santa.age}-year-old #{santa.ethnicity} #{santa.gender} Santa going by #{santa.nickname}!"}
+puts "
+*******************************************
+Be sure to watch your cookies. See you next year!"
+exit
