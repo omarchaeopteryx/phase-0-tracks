@@ -102,7 +102,7 @@ santas.each {|santa| p santa}
 
 crazy_santas = []
 
-50.times do
+500.times do
   crazy_santas << Santa.new(example_genders.sample,example_ethnicities.sample,nickname.sample)
   crazy_santas
 end
