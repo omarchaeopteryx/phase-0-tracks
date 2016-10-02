@@ -4,4 +4,23 @@
 
 # Pseudocoding a Word-Guessing Game ("Hangman")
 
-# 
+# Declare a new word-guessing class. Some thoughts:
+
+# The word class needs to have some way of gathering a string from the user's input. The word class also needs to make an empty array or string of "_" for however long the user's word is.
+  # There also needs to be a way to extract the length of the given user string and set that as the total allowed guesses for the game.
+
+# There needs to be some sort of flag that says when the game is over, essentially. Could declare this as an initializing variable.
+  # This could be done by either getting the secret word right, or by running out number of guesses.
+
+# There needs to be some function to "guess" and take the user's input. Then compare that guess to the given letters in the "key."
+
+  # If the guess is a match or not a match, you reduce the number of allowed guesses by one.
+  # If the guess is the same as was previously guessed, you do not change the number of allowed guesses.
+
+# There also needs to be a way to read out or display the blank name. This could be done at initialization perhaps? Or called upon when the user wants (which is better?).
+
+# DRIVER CODE
+
+# The driver code will present some sort of welcoming text. It will then ask the user (person A) to put in the secret word. It will then ask person B to guess a letter that belongs to that secret word. It will then run the new method test on it and store that letter into some kind of list of tested letters thus far. It should then spit back whether it worked or not: if it doesn't work, it can say, 'Guess again'; if it does work, it re-displays the hidden word; if it was a repeat guess, it says 'Oops, try again'; in each case, it must change the total guess number appropriately. 
+
+# When the word is fully complete, the game is over.
