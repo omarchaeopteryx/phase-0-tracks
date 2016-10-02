@@ -5,7 +5,7 @@ require_relative 'hangman_game'
 describe Hangman do
   let(:hangman_test) { Hangman.new }
   let(:hangman_word) { hangman_test.get_secret_word("secret")}
-  let(:hangman_letter) { hangman_test.get_secret_word("secret"); hangman_test.get_number_tries("secret"); hangman_test.make_word_array("secret");}
+  # let(:hangman_letter) { hangman_test.get_secret_word("secret"); hangman_test.get_number_tries("secret"); hangman_test.make_word_array("secret"); hangman_test.make_gameboard("secret"); hangman_test.get_letter("e")}
 
   it "Getting the secret word; should show a string" do
     expect(hangman_test.get_secret_word("secret")).to eq "secret"
@@ -28,11 +28,11 @@ describe Hangman do
   # end
 
   it "Checking if letter has been guessed already" do
-    expect(hangman_test.get_letter("e")).to eq "e"
+    expect(hangman_test.get_letter("E")).to eq "e"
   end
 
   it "Checking if letter appears in secret array" do
-    expect(hangman_letter.check_answer("e")).to be true
+    expect(hangman_test.check_letter("e")).to be false
   end
-
+#     expect(hangman_letter.check_answer("e")).to eq ["_","e","_","_","e","_"]
 end

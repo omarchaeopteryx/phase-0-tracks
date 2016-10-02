@@ -64,13 +64,16 @@ class Hangman
     @guessed_letter
   end
 
-  def check_answer(letter_guess)
-    @guessed_letter = letter_guess.downcase
-    @secret_word_array.map {|letter| if letter == @guessed_letter then @letter_match = true; else end}
+  def check_letter(letter_guess)
+
+    if @already_tried = false && @stop_asking = false
+      @secret_word_array.map {|letter| if letter == @guessed_letter then @letter_match = true; else end}
+    end
     @letter_match
   end
 
-
+  #
+  #
   #   location = @secret_word_array.find_index(@guessed_letter)
   #   if location != nil
   #     @letter_match = true
@@ -87,22 +90,22 @@ end
 
 # Driver code goes here (Be sure to comment out when running rspec)
 # # #
-game1 = Hangman.new
-puts "Hi, what is your secret word?"
-users_word = gets.chomp
-game1.get_secret_word(users_word)
-puts "You typed in a word. Shhhh."
-game1.get_number_tries(users_word)
-game1.make_word_array(users_word)
-game1.make_gameboard(users_word)
-p game1.secret_word_array
-p game1.gameboard_array
-p game1.number_tries
-game1.get_letter("z")
-p game1.guesses_array
-p game1.check_answer("Z")
-p game1.gameboard_array
-puts "Now let the other person try to guess a letter."
+# game1 = Hangman.new
+# puts "Hi, what is your secret word?"
+# users_word = gets.chomp
+# game1.get_secret_word(users_word)
+# puts "You typed in a word. Shhhh."
+# game1.get_number_tries(users_word)
+# game1.make_word_array(users_word)
+# game1.make_gameboard(users_word)
+# p game1.secret_word_array
+# p game1.gameboard_array
+# p game1.number_tries
+# game1.get_letter("z")
+# p game1.guesses_array
+# p game1.check_answer("Z")
+# p game1.gameboard_array
+# puts "Now let the other person try to guess a letter."
 
 # game2 = Hangman.new
 # game2.get_secret_word("secret")
