@@ -12,27 +12,25 @@ class Hangman
       puts ("*"*i + title[i])
       i += 1
     end
-    @game_over = false  # Either getting word right, or by running out of guesses will end the game.
+    @game_over = false  # Either getting word right, or by running out of guesses will end the game
     @secret_word_array = []
     @gameboard_array = []
     @guesses_array = []
-    @already_tried = false
+    @already_tried = false # Setting up Boolean flags that might be of use
     @stop_asking = false
     @letter_match = false
-    @taunt = 0
-    # @number_tries = 10 # rspec seems to like a default value here...?
+    # @number_tries = 10 # rspec seemed to like a default value here...?
   end
 
-  # Gathering a string from the user's input.
+  # Gathering a string from the user's input:
   def get_secret_word(secret_word)
     @secret_word = secret_word.to_s.downcase
     puts (("* " +  "\n")*50 + "X_X \n")
     @secret_word
   end
 
-  # Extracting the length of the given user string and: 1) set that as the total allowed guesses for the game, and 2) make it into an array.
+  # Extracting the length of the given user string and: 1) set that as the total allowed guesses for the game, and 2) make it into an array:
   def get_number_tries(secret_word)
-    @secret_word
     @number_tries = secret_word.length
     @number_tries
   end
@@ -42,7 +40,7 @@ class Hangman
     @secret_word_array
   end
 
-  # The word class also needs to make an empty array or string of "_" for however long the user's word is.
+  # The word class also needs to make an empty array or string of "_" for however long the user's word is:
   def make_gameboard(secret_word)
     gameboard = @secret_word_array.dup
     gameboard.each {|i| @gameboard_array.push("_")}
@@ -52,32 +50,28 @@ class Hangman
   def get_letter(letter_guess)
     @guessed_letter = letter_guess.downcase
     if @guesses_array.include?(@guessed_letter)
-      # @already_tried = true
+      @number_tries = @number_tries
     else
-      # @already_tried = false
       @guesses_array << @guessed_letter
-      @number_tries = (@number_tries - 1)
+      @number_tries = @number_tries - 1
     end
     @guessed_letter
   end
 
   def check_letter(letter_guess)
-    if @stop_asking == false
-      @secret_word_array.map {|letter| if letter == @guessed_letter then @letter_match = true; else end} # keep this last one as "="
-    else
-    end
+    @secret_word_array.map {|letter| if letter == @guessed_letter then @letter_match = true; else end} # Note, keep this last one as "="
     @letter_match
   end
 
   def swap_letter(letter_guess)
     index_holder = [] # Part I: finding indexes of the secret array
     @secret_word_array.each.with_index {|letter, index| if (letter == @guessed_letter) == true then index_holder << index end}
-    # Part II: assigning index from secret array to game board (find quicker way to do this...)
+    # Part II: assigning index from secret array to game board (Question: is there a way to do these two Parts in one step?)
     if @letter_match == true
       index_holder.each {|index| @gameboard_array[index] = @guessed_letter}
       @already_tried = true
     else
-      @number_tries -= (@number_tries - 1)
+      @number_tries = (@number_tries - 1)
     end
     @already_tried
     @gameboard_array
@@ -108,38 +102,17 @@ class Hangman
       puts "Getting warmer...\n"
     end
   end
-  # def run_letters(letter_guess) <-- Find a way to chain these functions into one series...
-  #   runner.get_letter(letter_guess)
-  #   runner.check_letter(letter_guess)
-  #   runner.swap_letter(letter_guess)
-  #   runner.show_gameboard
+  # def run_letters(letter_guess) <-- Next steps: find a way to chain these functions into one series...
+  #   .get_letter(letter_guess)
+  #   .check_letter(letter_guess)
+  #   .swap_letter(letter_guess)
+  #   .show_gameboard
   # end
 end
 
-# Test driver code below (Comment out all the below when running rspec):
+# Test driver code below (Comment out below when running rspec):
 
-# TESTING
-# game1 = Hangman.new
-# puts "Hi, what is your secret word?"
-# users_word = gets.chomp
-# game1.get_secret_word(users_word)
-# puts "You typed in a word. Shhhh."
-# game1.get_number_tries(users_word)
-# game1.make_word_array(users_word)
-# game1.make_gameboard(users_word)
-# p game1.secret_word_array
-# p game1.gameboard_array
-# p game1.number_tries
-# game1.get_letter("z")
-# p game1.guesses_array
-# p game1.check_letter("Z")
-# game1.swap_letter("z")
-# p game1.gameboard_array
-# game1.show_gameboard
-# puts "Now let the other person try to guess a letter."
-# game1.run_letters("a")
-
-Making loops for user interface:
+#Making loops for user interface:
 
 my_game = Hangman.new
 puts "Hi, what is your secret word?"

@@ -6,8 +6,9 @@ describe Hangman do
   let(:hangman_test) { Hangman.new }
   let(:hangman_word) { hangman_test.get_secret_word("secret")}
   let(:hangman_letter) { hangman_test.get_secret_word("secret"); hangman_test.get_number_tries("secret"); hangman_test.make_word_array("secret");
-  hangman_test.get_letter("e"); hangman_test.make_gameboard("secret")
-  hangman_test.check_letter("e"); hangman_test.guessed_letter}
+    hangman_test.make_gameboard("secret");
+    hangman_test.guesses_array}
+  # hangman_test.check_letter("e"); hangman_test.guessed_letter}
 
   it "Getting the secret word; should show a string" do
     expect(hangman_test.get_secret_word("secret")).to eq "secret"
@@ -29,16 +30,16 @@ describe Hangman do
   # expect(hangman_word.get_letter("e")).to have_attributes(length:1, class:String)
   # end
 
-  it "Checking if letter has been guessed already" do
-    expect(hangman_test.get_letter("E")).to eq "e"
+  it "Checking if letter has been acquired" do
+    expect(hangman_word.get_letter("E")).to eq "e" # FIX
   end
 
-  it "Checking if letter appears in secret array" do
+  it "Checking if letter appears in array" do
     expect(hangman_test.check_letter("e")).to be false
   end
 
   it "Checking gameboard return" do
-    expect(hangman_test.swap_letter("e")).to be true
+    expect(hangman_letter.swap_letter("e")).to be true # FIX
   end
 
   it "Check if the game is over yet (stop asking for input)" do
