@@ -44,4 +44,8 @@ describe Hangman do
   it "Check if the game is over yet (stop asking for input)" do
     expect(hangman_test.check_status).to be false
   end
+
+  it "Checking taunting of user" do
+    expect(hangman_test.taunt_user("e")).to eq "Nicely done.\n"
+  end
 end

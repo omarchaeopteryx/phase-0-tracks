@@ -12,24 +12,21 @@ class Hangman
       puts ("*"*i + title[i])
       i += 1
     end
-    # @secret_word = secret_word # Either this or nil OK...
     @game_over = false  # Either getting word right, or by running out of guesses will end the game.
-    # @number_tries = number_tries
     @secret_word_array = []
     @gameboard_array = []
     @guesses_array = []
     @already_tried = false
     @stop_asking = false
     @letter_match = false
+    @taunt = 0
     # @number_tries = 10 # rspec seems to like a default value here...?
   end
 
   # Gathering a string from the user's input.
   def get_secret_word(secret_word)
-    # @game_over = secret_word.length
     @secret_word = secret_word.to_s.downcase
     puts (("* " +  "\n")*50 + "X_X \n")
-    # @number_tries = @secret_word.length # FIX!!!
     @secret_word
   end
 
@@ -59,7 +56,7 @@ class Hangman
     else
       # @already_tried = false
       @guesses_array << @guessed_letter
-      @number_tries = (@number_tries-1)
+      @number_tries = (@number_tries - 1)
     end
     @guessed_letter
   end
@@ -67,6 +64,7 @@ class Hangman
   def check_letter(letter_guess)
     if @stop_asking == false
       @secret_word_array.map {|letter| if letter == @guessed_letter then @letter_match = true; else end} # keep this last one as "="
+    else
     end
     @letter_match
   end
@@ -79,26 +77,36 @@ class Hangman
       index_holder.each {|index| @gameboard_array[index] = @guessed_letter}
       @already_tried = true
     else
-      @number_tries = (@number_tries - 1)
+      @number_tries -= (@number_tries - 1)
     end
-    @gameboard_array
     @already_tried
+    @gameboard_array
   end
 
   def show_gameboard
     puts @gameboard_array.join(" ")
-    p @number_tries
+    puts "Tries left: #{@number_tries}"
   end
 
   def check_status
-    if @number_tries == 1
-      @game_over == true
-    elsif @gameboard_array == @secret_word_array
+    if @number_tries == 0
       @game_over == true
       puts "Game over!"
       exit
+    elsif @gameboard_array == @secret_word_array
+      @game_over == true
+      puts "Nice job! Game over!"
+      exit
     end
     @game_over
+  end
+
+  def taunt_user
+    if @secret_word_array.include?(@guessed_letter)
+      puts "Nicely done.\n"
+    else
+      puts "Getting warmer...\n"
+    end
   end
   # def run_letters(letter_guess) <-- Find a way to chain these functions into one series...
   #   runner.get_letter(letter_guess)
@@ -131,27 +139,30 @@ end
 # puts "Now let the other person try to guess a letter."
 # game1.run_letters("a")
 
-# Making loops for user interface:
+Making loops for user interface:
 
 my_game = Hangman.new
 puts "Hi, what is your secret word?"
 my_word = gets.chomp
 my_game.get_secret_word(my_word)
 my_game.get_number_tries(my_word)
-puts "OK! You have #{my_game.get_number_tries(my_word)} tries."
+puts "Let's play!"
 my_game.make_word_array(my_word)
 my_game.make_gameboard(my_word)
 
-puts "All right! Let the other person guess a letter:\n"
+puts "Please let the other player guess a letter:\n"
+my_game.show_gameboard
 
 until @game_over == true
-  puts "Another letter to try?"
-  my_game.show_gameboard
+  puts "Which letter would you like to try? \n \n"
+  # my_game.show_gameboard
   my_guess = gets.chomp
   my_game.get_letter(my_guess)
   my_game.check_letter(my_guess)
   my_game.swap_letter(my_guess)
+  my_game.taunt_user
   my_game.show_gameboard
   my_game.check_status
-
 end
+
+#END
