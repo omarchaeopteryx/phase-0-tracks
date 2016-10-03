@@ -1,8 +1,8 @@
 # OM, DBC Challenge 6.6
 
 class Hangman
-  attr_reader :game_over, :secret_word_array, :gameboard_array, :guesses_array, :guessed_letter, :already_tried, :number_tries, :stop_asking, :letter_match
-  attr_accessor :secret_word;
+  attr_reader :game_over, :secret_word_array, :gameboard_array, :guesses_array, :guessed_letter, :already_tried, :stop_asking, :letter_match
+  attr_accessor :secret_word; :number_tries; :game_over
 
   def initialize()
     puts "Starting new game..."
@@ -21,7 +21,7 @@ class Hangman
     @already_tried = false
     @stop_asking = false
     @letter_match = false
-    @number_tries = 10 # rspec seems to like a default value here...?
+    # @number_tries = 10 # rspec seems to like a default value here...?
   end
 
   # Gathering a string from the user's input.
@@ -55,9 +55,9 @@ class Hangman
   def get_letter(letter_guess)
     @guessed_letter = letter_guess.downcase
     if @guesses_array.include?(@guessed_letter)
-      @already_tried = true
+      # @already_tried = true
     else
-      @already_tried = false
+      # @already_tried = false
       @guesses_array << @guessed_letter
       @number_tries = (@number_tries-1)
     end
@@ -65,31 +65,52 @@ class Hangman
   end
 
   def check_letter(letter_guess)
-
-    if @already_tried = false && @stop_asking = false
-      @secret_word_array.map {|letter| if letter == @guessed_letter then @letter_match = true; else end}
+    if @stop_asking == false
+      @secret_word_array.map {|letter| if letter == @guessed_letter then @letter_match = true; else end} # keep this last one as "="
     end
     @letter_match
   end
 
-  #
-  #
-  #   location = @secret_word_array.find_index(@guessed_letter)
-  #   if location != nil
-  #     @letter_match = true
-  #     @gameboard_array[location] = @secret_word_array[location]
-  #   else
-  #     puts "No answer."
-  #     @letter_match = false
-  #   end
-  #   @number_tries = (@number_tries-1)
-  #   @letter_match
-  # end
+  def swap_letter(letter_guess)
+    index_holder = [] # Part I: finding indexes of the secret array
+    @secret_word_array.each.with_index {|letter, index| if (letter == @guessed_letter) == true then index_holder << index end}
+    # Part II: assigning index from secret array to game board (find quicker way to do this...)
+    if @letter_match == true
+      index_holder.each {|index| @gameboard_array[index] = @guessed_letter}
+      @already_tried = true
+    else
+      @number_tries = (@number_tries - 1)
+    end
+    @gameboard_array
+    @already_tried
+  end
 
+  def show_gameboard
+    puts @gameboard_array.join(" ")
+    p @number_tries
+  end
+
+  def check_status
+    if @number_tries == 1
+      @game_over == true
+    elsif @gameboard_array == @secret_word_array
+      @game_over == true
+      puts "Game over!"
+      exit
+    end
+    @game_over
+  end
+  # def run_letters(letter_guess) <-- Find a way to chain these functions into one series...
+  #   runner.get_letter(letter_guess)
+  #   runner.check_letter(letter_guess)
+  #   runner.swap_letter(letter_guess)
+  #   runner.show_gameboard
+  # end
 end
 
-# Driver code goes here (Be sure to comment out when running rspec)
-# # #
+# Test driver code below (Comment out all the below when running rspec):
+
+# TESTING
 # game1 = Hangman.new
 # puts "Hi, what is your secret word?"
 # users_word = gets.chomp
@@ -103,10 +124,34 @@ end
 # p game1.number_tries
 # game1.get_letter("z")
 # p game1.guesses_array
-# p game1.check_answer("Z")
+# p game1.check_letter("Z")
+# game1.swap_letter("z")
 # p game1.gameboard_array
+# game1.show_gameboard
 # puts "Now let the other person try to guess a letter."
+# game1.run_letters("a")
 
-# game2 = Hangman.new
-# game2.get_secret_word("secret")
-# p game2.secret_word
+# Making loops for user interface:
+
+my_game = Hangman.new
+puts "Hi, what is your secret word?"
+my_word = gets.chomp
+my_game.get_secret_word(my_word)
+my_game.get_number_tries(my_word)
+puts "OK! You have #{my_game.get_number_tries(my_word)} tries."
+my_game.make_word_array(my_word)
+my_game.make_gameboard(my_word)
+
+puts "All right! Let the other person guess a letter:\n"
+
+until @game_over == true
+  puts "Another letter to try?"
+  my_game.show_gameboard
+  my_guess = gets.chomp
+  my_game.get_letter(my_guess)
+  my_game.check_letter(my_guess)
+  my_game.swap_letter(my_guess)
+  my_game.show_gameboard
+  my_game.check_status
+
+end
