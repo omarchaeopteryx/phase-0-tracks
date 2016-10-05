@@ -5,6 +5,9 @@
 // Release 0: Find the longest phrase in a given list of arrays or phrases
 
 var myArray = ["Arizona", "Azerbaijan", "Alaska", "Antwerp"];
+var myArrayB = ["a", "acgt", "acgtcgct", "atat","aa",];
+var myArrayC = ["The Rolling Stones", "The Beatles", "Led Zeppelin", "Bob Dylan is the best, bro"];
+var myArrayD = ["Ahhhhhhhhh!", "Gadzooks!", "Egad!", "Um."];
 
 // console.log(myArray.length);
 
@@ -26,3 +29,6 @@ function lengthTester(anArray){
 	return myHand; // ...By the end of the array, what do I have left? That is what's in my hand.
 }
 console.log("Your winner is: " + lengthTester(myArray));
+console.log("Your winner is: " + lengthTester(myArrayB));
+console.log("Your winner is: " + lengthTester(myArrayC));
+console.log("Your winner is: " + lengthTester(myArrayD));
