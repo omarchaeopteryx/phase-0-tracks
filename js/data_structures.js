@@ -1,3 +1,5 @@
+// Challenge 7.2, Justin Steensma & Omar Malik
+
 var colors = ['Blue', 'Purple', 'Gold', 'Red'];
 
 var name = ['Koda', 'Yoda', 'Eduardo', 'Stella'];
