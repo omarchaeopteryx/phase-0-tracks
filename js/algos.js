@@ -8,6 +8,10 @@ var myArray = ["Arizona", "Azerbaijan", "Alaska", "Antwerp"];
 var myArrayB = ["a", "acgt", "acgtcgct", "atat","aa",];
 var myArrayC = ["The Rolling Stones", "The Beatles", "Led Zeppelin", "Bob Dylan is the best, bro"];
 var myArrayD = ["Ahhhhhhhhh!", "Gadzooks!", "Egad!", "Um."];
+// Additional variables for Release 1, equivalence checker
+var agentA = {name: 'David', 'age': 36};
+var agentB = {name: 'Diana', 'age':36};
+var agentC = {name: 'David','age':18};
 
 // console.log(myArray.length);
 
@@ -27,8 +31,31 @@ function lengthTester(anArray){
 		equalizer.push("*Noted other case*");console.log(equalizer);} // (Adding exception case  for when the lengths are the same... flag to console and keep what you have.)
 	}
 	return myHand; // ...By the end of the array, what do I have left? That is what's in my hand.
-}
+};
+
+
+function equivalenceChecker(personA,personB){
+		var name1 =  personA.name;
+		var name2 = personB.name;
+		var age1 = personA.age;
+		var age2 = personB.age;
+		var result = null;
+		if (name1 === name2 || age1 === age2)
+		result = true;
+    else {
+		result = false;
+		}
+	return result
+};
+
 console.log("Your winner is: " + lengthTester(myArray));
 console.log("Your winner is: " + lengthTester(myArrayB));
 console.log("Your winner is: " + lengthTester(myArrayC));
 console.log("Your winner is: " + lengthTester(myArrayD));
+
+// Release 1 update: creating a function that takes two given objects and compares their keys, values to see if there are any matches
+
+console.log("Comparing AgentA, AgentC: " + equivalenceChecker(agentA,agentC));
+console.log("Comparing AgentA, AgentB: " + equivalenceChecker(agentA,agentB));
+console.log("Comparing AgentB, AgentA: " + equivalenceChecker(agentB,agentA));
+console.log("Comparing AgentB, AgentC: " + equivalenceChecker(agentB,agentC));
