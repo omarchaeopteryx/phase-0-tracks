@@ -79,6 +79,11 @@ function letterPicker(){
 	return randomLetter;
 }
 
+function randomNumber(){
+	var maxLength = myNumbers[Math.floor(Math.random() * myNumbers.length)];
+	return maxLength;
+}
+
 function wordMaker(){
 	var myLetters = [];
 	var myLength = randomNumber();
@@ -96,14 +101,28 @@ function wordMaker(){
 
 // Now that we've created a way to make a random word (stitching together letters for a randomly generated number of times) that's saved as a string, we have to place each string in a list of items. The user selects the length of the array, so it should go from 0 to the "given number" and create a word each time and store it.
 
-function ArrayMaker(yourlength) {
+function arrayMaker(yourlength) {
 	var myArray = [];
 	for (var i=0;i<yourlength;i++){
 		myArray.push(wordMaker());
 	}
 	return myArray;
 }
+//
+// console.log(arrayMaker(3)); // <-- Testing
+// console.log(arrayMaker(7));
+// console.log(arrayMaker(10));
 
-console.log(ArrayMaker(3)); // <-- Testing
-console.log(ArrayMaker(7));
-console.log(ArrayMaker(10));
+// Add driver code that does the following 10 times: generates an array, prints the array, feeds the array to your "longest word" function, and prints the result.
+
+// DRIVER CODE:
+
+console.log("Here are your generated test data:\n")
+for (var i=1;i<11;i++){
+  var latestResult = arrayMaker(randomNumber())
+  console.log("Generated Test Array " + i + ":\n");
+  console.log(latestResult);
+  console.log("\n --> Longest Word: " + lengthTester(latestResult));
+  console.log("\n")
+}
+console.log("End of sequence. Goodbye!")
