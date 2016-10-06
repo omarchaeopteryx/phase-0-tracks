@@ -13,14 +13,12 @@ var agentA = {name: 'David', 'age': 36};
 var agentB = {name: 'Diana', 'age':36};
 var agentC = {name: 'David','age':18};
 
-// console.log(myArray.length);
-
 // Additional variables for Release 2, generating random test data
 
 var myLetters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
 var myNumbers = [1,2,3,4,5,6,7,8,9,10];
 
-// Create a function that takes the first item in an array and remembers that variable as myHand, as in "what's in my hand?"
+// Create a function that takes the first item in an array and remembers that variable, asking the algorithm, "What's in my hand?"
 function lengthTester(anArray){
 	var myHand = anArray[0];
   // Then, we go one by one, moving from one item to the next through the whole array.
@@ -58,7 +56,7 @@ console.log("Your winner is: " + lengthTester(myArrayB));
 console.log("Your winner is: " + lengthTester(myArrayC));
 console.log("Your winner is: " + lengthTester(myArrayD));
 
-// Release 1 update: creating a function that takes two given objects and compares their keys, values to see if there are any matches
+// Release 1 update: creating a function that takes two given objects and compares their keys, values to see if there are any matches (true or false statement is returned)
 
 console.log("Comparing AgentA, AgentC: " + equivalenceChecker(agentA,agentC));
 console.log("Comparing AgentA, AgentB: " + equivalenceChecker(agentA,agentB));
@@ -72,7 +70,7 @@ console.log("Comparing AgentB, AgentC: " + equivalenceChecker(agentB,agentC));
 // var rand = myArray[Math.floor(Math.random() * myArray.length)];
 // console.log(rand);
 
-// Setting up some sub-functions that can used to make a word in an array of any given length. First, you need to be able to make a word of length 1-10 by generating a number, and then looping through to that random number. Each time you do a step, you also need to pick a letter from 1-26 letters, and save it. In this case, I think it makes sense to make a "blank" array of letters, and then put it together as one "random word" at the end.
+// Setting up some sub-functions that can used to make a word in an array of any given length. First, you need to be able to make a word of length 1-10 by generating a number. Then you loop through letters until you have that number, and at the same time, you  need to pick a letter from 1-26 letters, and save it. In this case, I think it makes sense to make a "blank" array of letters, store the letters in it, and then put it together as one "random word" at the end.
 
 function letterPicker(){
 	var randomLetter = myLetters[Math.floor(Math.random() * myLetters.length)];
@@ -97,8 +95,6 @@ function wordMaker(){
 	return myLetters.join('');
 }
 
-// console.log(wordMaker()); <--Testing
-
 // Now that we've created a way to make a random word (stitching together letters for a randomly generated number of times) that's saved as a string, we have to place each string in a list of items. The user selects the length of the array, so it should go from 0 to the "given number" and create a word each time and store it.
 
 function arrayMaker(yourlength) {
@@ -113,7 +109,7 @@ function arrayMaker(yourlength) {
 // console.log(arrayMaker(7));
 // console.log(arrayMaker(10));
 
-// Add driver code that does the following 10 times: generates an array, prints the array, feeds the array to your "longest word" function, and prints the result.
+// Add driver code that does the following 10 times: generates an array, prints the array, feeds the array to the above "longest word" function, and prints the results.
 
 // DRIVER CODE:
 
