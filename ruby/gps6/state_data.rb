@@ -1,6 +1,19 @@
 #population density is number of people per square mile as of 2012
 #this data is updated every year with estimates from a 10 year census
 
+# the difference between two different hash styles.
+# two hashes are necessary becaue (i) you essentially have key,value;
+# (ii) nested value is necessary. The 'value' hold multiple values.
+
+# 'hashy hash' is used because strings are used and we don't have to re-convert it.
+# Most importantly, the symbol is efficient because instead of storing
+# strings.
+# When you call strings, you make a new instance of a string.
+# The object ID is different from each string.
+# The symbol is more of immutable stringholder.
+
+# STATE_DATA's kind of variable is constant. All capitalized is a constant.
+# The scope is effectively global.
 
 STATE_DATA = {
   "Alabama" => {population_density: 94.65, population: 4822023},
