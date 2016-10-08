@@ -117,24 +117,20 @@ STATE_DATA.each {|state, inner_hash| VirusPredictor.new(state).virus_effects  }
 
 # What are the differences between the two different hash syntaxes shown in the state_data file?
 
-# 'hashy hash' is used because strings are used and we don't have to re-convert it.
-# Most importantly, the symbol is efficient because instead of storing
-# strings.
-# When you call strings, you make a new instance of a string.
-# The object ID is different from each string.
-# The symbol is more of immutable stringholder.
+# The outer, 'hashy hash' allows us to more easily retrieve the keys as strings of the (object String class) already. If we were to call them using symbols, we would then have to convert them in an additional step. It is also for efficiency reasons that we then create symbols for "population density" and "population" in the sub-hash. Using symbols creates objects that are unique to each symbol, and therefore we only have one case of that symbol held in the computer's memory; each string we create, on the other hand, would take up a new space in the memory (a new object ID)-- this is why we don't write "population" as a string. Symbols are, as our Guide called it, 'immutable'.
 
 # What does require_relative do? How is it different from require?
 
-# the difference between two different hash styles.
-# two hashes are necessary becaue (i) you essentially have key,value;
-# (ii) nested value is necessary. The 'value' hold multiple values.
+# The `require_relative` notation allows us to read-in and interact with a file that is stored locally. It's more common to use this notation for, as in this case, reading in a constant or dataset, because the alternative `require` style is preferred for loading Modules or Classes.
 
 # What are some ways to iterate through a hash?
 
-# .each | .map
+# .each | .map are both ways to iterate through a hash. In these cases you would have to track which keys, values you would like the block of code to access in order to retrieve the right variables.
 
 # When refactoring virus_effects, what stood out to you about the variables, if anything?
 
+# The lengths of the variable names was one thing, in addition to their being repeated a few times within each instance method.
+
 # What concept did you most solidify in this challenge?
-# hashes
+
+# For me, personally, the practices of refactoring started to stick in this challenge. For instance, it made a lot of sense when we created a "result" return (after first defining a variable) for the "numbers of deaths" rather than repeating the calculation over and over with different rates. It made sense to me to write a generalized equation, and think about what value you want to come out of it, and then work from there. Always good to get more hash practice, too.
