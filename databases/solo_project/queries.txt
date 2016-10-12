@@ -74,4 +74,56 @@ OUTPUT:
 3|Hylidae|959|TRUE|1
 5|Salamandridae|114|TRUE|2
 
+
+6. Try a few different joins on the tables and record the inputs and results.
+
+(a) Trying out an "INNER JOIN":
+
+INPUT:
+
+SELECT * FROM amphibians INNER JOIN orders ON amphibians.order_id = orders.id;
+
+OUTPUT:
+
+1|Ambystomidae|32|TRUE|2|2|Caudata
+2|Bufonidae|597|TRUE|1|1|Anura
+3|Hylidae|959|TRUE|1|1|Anura
+5|Salamandridae|114|TRUE|2|2|Caudata
+
+(b) Trying out a "LEFT JOIN":
+
+INPUT:
+
+SELECT amphibians.family_name, amphibians.species_count, orders.name FROM amphibians LEFT JOIN orders ON amphibians.order_id=orders.id;
+
+OUTPUT:
+
+Ambystomidae|32|Caudata
+Bufonidae|597|Anura
+Hylidae|959|Anura
+Salamandridae|114|Caudata
+
+(c) Trying out a "LEFT OUTER JOIN":
+
+INPUT:
+
+SELECT amphibians.family_name, orders.name FROM amphibians LEFT OUTER JOIN orders ON amphibians.order_id = orders.id;
+
+OUTPUT:
+
+Ambystomidae|Caudata
+Bufonidae|Anura
+Hylidae|Anura
+Salamandridae|Caudata
+
+(d) Trying out a "RIGHT JOIN":
+
+INPUT:
+
+SELECT * FROM amphibians RIGHT JOIN orders ON amphibians.order_id=orders.id;
+
+OUTPUT:
+
+Error: RIGHT and FULL OUTER JOINs are not currently supported
+
 ###
