@@ -1,0 +1,77 @@
+# OM
+# DBC, Phase 0, Week 8.3
+
+1. Display the information in one table (either table is fine)
+
+INPUT:
+
+SELECT * FROM amphibians;
+
+OUTPUT:
+
+1|Ambystomidae|32|TRUE|2
+2|Bufonidae|596|TRUE|1
+3|Hylidae|959|TRUE|1
+4|Pelodytidae|3|FALSE|1
+5|Salamandridae|114|TRUE|2
+
+2. Update an item that meets some condition (you can choose a condition that makes sense).
+
+INPUT:
+
+(a)
+UPDATE amphibians SET species_count=597 WHERE family_name="Bufonidae";
+
+(b)
+SELECT * FROM amphibians WHERE family_name="Bufonidae";
+
+OUTPUT:
+
+2|Bufonidae|597|TRUE|1
+
+3. Display the information in both tables using one query.
+
+INPUT:
+
+SELECT * FROM amphibians, orders WHERE amphibians.order_id = orders.id;
+
+OUTPUT:
+
+1|Ambystomidae|32|TRUE|2|2|Caudata
+2|Bufonidae|597|TRUE|1|1|Anura
+3|Hylidae|959|TRUE|1|1|Anura
+4|Pelodytidae|3|FALSE|1|1|Anura
+5|Salamandridae|114|TRUE|2|2|Caudata
+
+4. Display a narrower selection of columns (fewer columns than all of them, in other words) from both tables using one query.
+
+INPUT:
+
+SELECT amphibians.family_name, orders.name FROM amphibians JOIN orders ON amphibians.order_id = orders.id;
+
+OUTPUT:
+
+Ambystomidae|Caudata
+Bufonidae|Anura
+Hylidae|Anura
+Pelodytidae|Anura
+Salamandridae|Caudata
+
+5. Delete an item that meets some condition (you can choose a condition that makes sense).
+
+INPUT:
+
+(a)
+DELETE FROM amphibians WHERE new_world="FALSE";
+
+(b)
+SELECT * FROM amphibians;
+
+OUTPUT:
+
+1|Ambystomidae|32|TRUE|2
+2|Bufonidae|597|TRUE|1
+3|Hylidae|959|TRUE|1
+5|Salamandridae|114|TRUE|2
+
+###
