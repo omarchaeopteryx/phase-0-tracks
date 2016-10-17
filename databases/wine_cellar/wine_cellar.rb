@@ -27,16 +27,16 @@ QQQ
 
 # Creating an "add item" function:
 
-# def db_adder(database)
-#   database.execute("INSERT INTO wine_cellar ")
-# end
+def db_adder(database, year, variety, geography, notes)
+  database.execute("INSERT INTO wine_cellar (year,variety,region,notes) VALUES (?,?,?,?)", [year,variety,geography,notes])
+end
 # def update_code(database, year, variety, region, notes)
 #   my_log.execute("INSERT INTO wine_cellar (year, variety, region, notes) VALUES (?, ?)", [year, variety, region, notes])
 # end
 
 # Creating a printout function:
 
-def log_printer(database)
+def db_printer(database)
   my_database_printout = database.execute("SELECT * FROM wine_cellar") # Note that you don't need the semicolon
   puts "\nHere is your database readout:"
   puts "="*30
@@ -63,10 +63,10 @@ until user_is_done_final == true
 
   if user_command == 1
     puts "You chose to view the list!"
-    log_printer(my_log) # Run the printout function for the database made so far
+    db_printer(my_log) # Run the printout function for the database made so far
   elsif user_command == 2 # Ask user for more information regarding the wine item
     puts "You chose to change the list!"
-    log_printer(my_log)
+    db_printer(my_log)
 
     until
     puts "\n\nHere are your options:\n1.Add an item\n2.Update an item\n3.Remove an item\n4.Return"
@@ -78,7 +78,7 @@ until user_is_done_final == true
 
       if user_command == 1
         puts "What year would you like to add?"
-        new_year = gets.chomp
+        new_year = gets.chomp.to_i
         puts "What grape variety is the wine?"
         new_variety = gets.chomp
         puts "What region is the wine from?"
@@ -87,6 +87,7 @@ until user_is_done_final == true
         new_notes = gets.chomp
         p [new_year, new_variety, new_region, new_notes]
         # Run some sort of INSERT function here...
+        db_adder(my_log,new_year,new_variety,new_region,new_notes)
 
       elsif user_command == 2
         puts "Which item number do you want to update?"
