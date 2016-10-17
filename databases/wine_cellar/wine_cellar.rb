@@ -30,10 +30,10 @@ QQQ
 def db_adder(database, year, variety, geography, notes)
   database.execute("INSERT INTO wine_cellar (year,variety,region,notes) VALUES (?,?,?,?)", [year,variety,geography,notes])
 end
-# def update_code(database, year, variety, region, notes)
-#   my_log.execute("INSERT INTO wine_cellar (year, variety, region, notes) VALUES (?, ?)", [year, variety, region, notes])
-# end
 
+def db_deleter(database, id)
+  database.execute("DELETE FROM wine_cellar where id=#{id}")
+end
 # Creating a printout function:
 
 def db_printer(database)
@@ -137,8 +137,8 @@ until user_is_done_final == true
         puts "Which item would you like to delete?"
         deleted_item_no = gets.chomp.to_i
         puts "OK. Item #{deleted_item_no} has been deleted!"
-        p updated_item_no
         # Run some sort of DELETE function here...
+        db_deleter(my_log,deleted_item_no)
 
       elsif user_command == 4
         break
