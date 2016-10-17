@@ -31,6 +31,21 @@ def db_adder(database, year, variety, geography, notes)
   database.execute("INSERT INTO wine_cellar (year,variety,region,notes) VALUES (?,?,?,?)", [year,variety,geography,notes])
 end
 
+# Creating an "update value for an item" function:
+
+def db_updater_item_year(database,updated_year,item_id)
+  execution_code = "UPDATE wine_cellar SET year=#{updated_year} WHERE id=#{item_id}"
+  database.execute(execution_code)
+end
+
+# OLD
+# def db_updater(database, id, col_name,col_value)
+#
+#   database.execute("UPDATE wine_cellar SET")
+# end
+
+# Creating a "remove item" function:
+
 def db_deleter(database, id)
   database.execute("DELETE FROM wine_cellar where id=#{id}")
 end
@@ -73,8 +88,7 @@ until user_is_done_final == true
 
     user_command = gets.chomp.to_i
 
-    # done_with_updating = false
-    # until done_with_updating == true
+    # FIX: When you update an item once, and then try to change the same item number again, it skips the option to change it and goes to "Here are your options: 1. Add..."
 
       if user_command == 1
         puts "What year would you like to add?"
@@ -102,36 +116,43 @@ until user_is_done_final == true
           updated_item_value = gets.chomp
 
           if updated_item_value == ("1" || "Year" || "year")
-            puts "You have changed the year."
+            puts "What do you want to change it to?"
+            my_updated_year = gets.chomp
+            db_updater_item_year(my_log,my_updated_year,updated_item_no)
+            puts "You have successfully changed the year."
+            user_is_done_changing == false
 
           elsif updated_item_value == ("2" || "Variety" || "variety")
             puts "You have changed the variety."
 
           elsif updated_item_value == ("3" || "Geography" || "geography")
             puts "You have changed the geography."
+            user_is_done_changing == false
 
           elsif updated_item_value == ("4" || "Notes" || "notes")
             puts "You have changed the notes."
+            user_is_done_changing == false
 
           elsif updated_item_value == ("5" || "Return" || "return")
+            user_is_done_changing == false
             break
           else
             puts "I didn't get that--"
+            user_is_done_changing == false
           end
 
           puts "Are you done updating (Y/N)?"
 
           if gets.chomp.upcase == ("Y" || "YES")
             user_is_done_changing = true
-
           else
             user_is_done_changing = false
-
           end
           p updated_item_no
           # ENDING THE UNTIL LOOP
         end
         # Run some sort of UPDATE function here...
+        # p [updated_item_no,updated_item_value]
 
       elsif user_command == 3
         puts "Which item would you like to delete?"
