@@ -63,8 +63,7 @@ end
 
 def db_printer(database)
   my_database_printout = database.execute("SELECT * FROM wine_cellar") # Note that you don't need the semicolon!
-  puts "\nHere is your database readout:"
-  puts "="*30
+  puts "\nHere is your current wine list:\n" + "="*30 + "\n\n"
   my_database_printout.each {|data_item| puts "Item No. #{data_item[0]}: #{data_item[1]} -- #{data_item[2]} -- #{data_item[3]} -- #{data_item[4]}"}
 end
 
@@ -74,25 +73,28 @@ my_log.execute(initialise_code)
 
 # my_log.execute("INSERT INTO wine_cellar (year, variety, region, notes) VALUES (2011, 'Red Blend', 'Central Coast', 'Very tasty')") <-- Creating test datum
 
-puts "\nWelcome to your WineCellar!\n"
+puts "\n"*20 + "*"*30 + "\nWelcome to your WineCellar!\n" + "*"*30
 
 user_command = nil
 
 until user_command == 3
 
-  puts "\n\nPlease choose an option from below:\n\n1. View my wine list\n2. Change my wine list\n3. Exit\n\n"
+  puts "\nPlease choose an option from below:\n\n1. View my wine list\n2. Change my wine list\n3. Exit\n\n"
 
   user_command = gets.chomp.to_i
 
   if user_command == 1
-    puts "You chose to view the list!\n"
+    puts "\nYou chose to view the list!\n"
     db_printer(my_log) # Run the printout function for the database made so far
+    puts "\n"+ "-"*30 + "\n"
+
   elsif user_command == 2 # Ask user for more information regarding the wine item
-    puts "You chose to change the list!\n"
+    puts "\nYou chose to change the list!\n"
     db_printer(my_log)
+    puts "\n"+ "-"*30 + "\n"
 
     until user_command == 4
-    puts "\n\nHere are your options:\n\n1. Add an item\n2. Update an item\n3. Remove an item\n4. Return\n\n"
+    puts "\nHere are your options:\n\n1. Add an item\n2. Update an item\n3. Remove an item\n4. Return\n\n"
 
     user_command = gets.chomp.to_i
 
