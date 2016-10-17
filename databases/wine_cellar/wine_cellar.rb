@@ -33,23 +33,23 @@ end
 
 # Creating a series of "update value for an item" functions:
 
-def db_updater_item_year(database,updated_year,item_id)
+def db_update_item_year(database,updated_year,item_id)
   execution_code = "UPDATE wine_cellar SET year=#{updated_year} WHERE id=#{item_id}" # REFACTOR: The only thing changing in this list is the updated_* code bit!
   database.execute(execution_code)
 end
 
 def db_update_item_variety(database,updated_variety,item_id)
-  execution_code = "UPDATE wine_cellar SET year=#{updated_variety} WHERE id=#{item_id}"
+  execution_code = "UPDATE wine_cellar SET variety='#{updated_variety}' WHERE id=#{item_id}"
   database.execute(execution_code)
 end
 
 def db_update_item_region(database,updated_region,item_id)
-  execution_code = "UPDATE wine_cellar SET year=#{updated_region} WHERE id=#{item_id}"
+  execution_code = "UPDATE wine_cellar SET region='#{updated_region}' WHERE id=#{item_id}"
   database.execute(execution_code)
 end
 
 def db_update_item_notes(database,updated_notes,item_id)
-  execution_code = "UPDATE wine_cellar SET year=#{updated_notes} WHERE id=#{item_id}"
+  execution_code = "UPDATE wine_cellar SET notes='#{updated_notes}' WHERE id=#{item_id}"
   database.execute(execution_code)
 end
 
@@ -73,15 +73,15 @@ my_log.execute(initialise_code)
 
 # my_log.execute("INSERT INTO wine_cellar (year, variety, region, notes) VALUES (2011, 'Red Blend', 'Central Coast', 'Very tasty')")
 
-puts "\nWelcome to the WineCellar!\n"
+puts "\nWelcome to your WineCellar!\n"
 
 user_command = nil
-user_is_done_final = false
-user_is_done_changing = false
+# user_is_done_final = false <-- No longer necessary
+# user_is_done_changing = false
 
 until user_command == 3
 
-  puts "\n\nPlease choose an option from below:\n1. View my wine list\n2. Change my wine list\n3. Exit"
+  puts "\n\nPlease choose an option from below:\n1. View my wine list\n2. Change my wine list\n3. Exit\n\n"
 
   user_command = gets.chomp.to_i
 
@@ -108,7 +108,7 @@ until user_command == 3
         new_region = gets.chomp
         puts "What tasting notes do you have to add?"
         new_notes = gets.chomp
-        p [new_year, new_variety, new_region, new_notes]
+        # p [new_year, new_variety, new_region, new_notes]
         # Run some sort of INSERT function here...
         db_adder(my_log,new_year,new_variety,new_region,new_notes)
 
@@ -122,32 +122,41 @@ until user_command == 3
         until user_command == 5
           puts "\n\nWhat value do you want to update?\n1.Year\n2.Variety\n3.Geography\n4.Notes\n5.Return"
 
-          updated_item_value = gets.chomp
+          updated_item_value = gets.chomp # NOTE: this is a string... Update?
 
           if updated_item_value == ("1" || "Year" || "year")
-            puts "What do you want to change it to?"
+            puts "What do you want to change Year to?"
             my_updated_year = gets.chomp
-            db_updater_item_year(my_log,my_updated_year,updated_item_no)
+            db_update_item_year(my_log,my_updated_year,updated_item_no)
             puts "You have successfully changed the year."
-            user_is_done_changing == false
+            # user_is_done_changing == false
 
           elsif updated_item_value == ("2" || "Variety" || "variety")
+            puts "What do you want to change Variety to?"
+            my_updated_variety = gets.chomp
+            db_update_item_variety(my_log,my_updated_variety,updated_item_no)
             puts "You have changed the variety."
 
           elsif updated_item_value == ("3" || "Geography" || "geography")
-            puts "You have changed the geography."
-            user_is_done_changing == false
+            puts "What do you want to change Region to?"
+            my_updated_region = gets.chomp
+            db_update_item_region(my_log,my_updated_region,updated_item_no)
+            puts "You have changed the region or geography."
+            # user_is_done_changing == false
 
           elsif updated_item_value == ("4" || "Notes" || "notes")
+            puts "What do you want to change Notes to?"
+            my_updated_notes = gets.chomp
+            db_update_item_notes(my_log,my_updated_notes,updated_item_no)
             puts "You have changed the notes."
-            user_is_done_changing == false
+            # user_is_done_changing == false
 
           elsif updated_item_value == ("5" || "Return" || "return")
-            user_is_done_changing == false
+            # user_is_done_changing == false
             break
           else
             puts "I didn't get that--"
-            user_is_done_changing == false
+            # user_is_done_changing == false
           end
 
           # puts "Are you done updating item (Y/N)?"
@@ -189,7 +198,7 @@ until user_command == 3
 
   elsif user_command == 3
     puts "\nGoodbye!\n"
-    user_is_done_final = true
+    # user_is_done_final = true
 
   else
     puts "I didn't quite understand that..."
