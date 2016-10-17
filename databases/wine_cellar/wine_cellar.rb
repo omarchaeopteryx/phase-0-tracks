@@ -49,13 +49,15 @@ my_log.execute(initialise_code)
 
 # my_log.execute("INSERT INTO wine_cellar (year, variety, region, notes) VALUES (2011, 'Red Blend', 'Central Coast', 'Very tasty')")
 
-puts "Welcome to the WineCellar!"
+puts "\nWelcome to the WineCellar!\n"
 
 user_command = nil
+user_is_done_final = false
+user_is_done_changing = false
 
-until user_command == 3
+until user_is_done_final == true
 
-  puts "Please choose an option from below:\n1. View my wine list\n2. Change my wine list\n3. Exit"
+  puts "\n\nPlease choose an option from below:\n1. View my wine list\n2. Change my wine list\n3. Exit"
 
   user_command = gets.chomp.to_i
 
@@ -65,7 +67,9 @@ until user_command == 3
   elsif user_command == 2 # Ask user for more information regarding the wine item
     puts "You chose to change the list!"
     log_printer(my_log)
-    puts "Here are your options:\n1.Add an item\n2.Update an item\n3.Remove an item"
+
+    until
+    puts "\n\nHere are your options:\n1.Add an item\n2.Update an item\n3.Remove an item\n4.Return"
 
     user_command = gets.chomp.to_i
 
@@ -83,37 +87,73 @@ until user_command == 3
         new_notes = gets.chomp
         p [new_year, new_variety, new_region, new_notes]
         # Run some sort of INSERT function here...
+
       elsif user_command == 2
         puts "Which item number do you want to update?"
         updated_item_no = gets.chomp.to_i
-        puts "OK!"
+        puts "OK. You have chosen to update Item #{updated_item_no}..."
+
+        # Now creating a sub-menu where we can change the attribute of a given row/item specifically....
+
+        until user_is_done_changing == true
+          puts "\n\nWhat value do you want to update?\n1.Year\n2.Variety\n3.Geography\n4.Notes\n5.Return"
+
+          updated_item_value = gets.chomp
+
+          if updated_item_value == ("1" || "Year" || "year")
+            puts "You have changed the year."
+
+          elsif updated_item_value == ("2" || "Variety" || "variety")
+            puts "You have changed the variety."
+
+          elsif updated_item_value == ("3" || "Geography" || "geography")
+            puts "You have changed the geography."
+
+          elsif updated_item_value == ("4" || "Notes" || "notes")
+            puts "You have changed the notes."
+
+          elsif updated_item_value == ("5" || "Return" || "return")
+            break
+          else
+            puts "I didn't get that--"
+          end
+
+          puts "Are you done updating (Y/N)?"
+
+          if gets.chomp.upcase == ("Y" || "YES")
+            user_is_done_changing = true
+
+          else
+            user_is_done_changing = false
+
+          end
+          p updated_item_no
+          # ENDING THE UNTIL LOOP
+        end
         # Run some sort of UPDATE function here...
+
       elsif user_command == 3
         puts "Which item would you like to delete?"
         deleted_item_no = gets.chomp.to_i
-        puts "OK!"
+        puts "OK. Item #{deleted_item_no} has been deleted!"
+        p updated_item_no
         # Run some sort of DELETE function here...
+
+      elsif user_command == 4
+        break
+
       else
         puts "I didn't get that..."
       end
 
-      # puts "Are you done with changing the list? (Y/N)"
-      # user_terminal_answer = gets.chomp
-      # #
-      # if user_terminal_answer.upcase == "Y" || "YES"
-      #   puts "OK!"
-      #   done_with_updating == true
-      # elsif user_terminal_answer.upcase == "N" || "NO"
-      #   puts "OK!"
-      #   done_with_updating == false
-      # end
+      end
 
   elsif user_command == 3
     puts "Goodbye!"
+    user_is_done_final = true
 
   else
     puts "I didn't quite understand that..."
-
   end
 end
 
