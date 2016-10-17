@@ -1,19 +1,19 @@
 # Omar Malik
 # DBC, Phase 0, Week 8.5
 
-# LINKING SQL, RUBY, and ORM THROUGH A WINE-CELLAR DATABASE
+# LINKING SQL, RUBY, and ORM THROUGH A 'WINE-CELLAR' DATABASE
 
 # LOGIC CODE:
 
 # Requiring gems:
 require 'sqlite3'
-require 'faker'
+# require 'faker'n <-- Not necessary: using inputted data
 
 # Creating a blank SQLite3 database:
 my_log = SQLite3::Database.new("wine_cellar.db")
 my_log.results_as_hash = true
 
-# Initializing a blank wine cellar log list:
+# Initializing a blank "wine_cellar" log list:
 
 initialise_code = <<-QQQ
 CREATE TABLE IF NOT EXISTS wine_cellar(
@@ -34,7 +34,7 @@ end
 # Creating a series of "update value for an item" functions:
 
 def db_update_item_year(database,updated_year,item_id)
-  execution_code = "UPDATE wine_cellar SET year=#{updated_year} WHERE id=#{item_id}" # REFACTOR: The only thing changing in this list is the updated_* code bit!
+  execution_code = "UPDATE wine_cellar SET year='#{updated_year}' WHERE id=#{item_id}" # REFACTOR?: The only thing changing in this list is the updated_* code bit!
   database.execute(execution_code)
 end
 
@@ -58,10 +58,11 @@ end
 def db_deleter(database, id)
   database.execute("DELETE FROM wine_cellar where id=#{id}")
 end
+
 # Creating a printout function:
 
 def db_printer(database)
-  my_database_printout = database.execute("SELECT * FROM wine_cellar") # Note that you don't need the semicolon
+  my_database_printout = database.execute("SELECT * FROM wine_cellar") # Note that you don't need the semicolon!
   puts "\nHere is your database readout:"
   puts "="*30
   my_database_printout.each {|data_item| puts "Item No. #{data_item[0]}: #{data_item[1]} -- #{data_item[2]} -- #{data_item[3]} -- #{data_item[4]}"}
@@ -71,119 +72,90 @@ end
 
 my_log.execute(initialise_code)
 
-# my_log.execute("INSERT INTO wine_cellar (year, variety, region, notes) VALUES (2011, 'Red Blend', 'Central Coast', 'Very tasty')")
+# my_log.execute("INSERT INTO wine_cellar (year, variety, region, notes) VALUES (2011, 'Red Blend', 'Central Coast', 'Very tasty')") <-- Creating test datum
 
 puts "\nWelcome to your WineCellar!\n"
 
 user_command = nil
-# user_is_done_final = false <-- No longer necessary
-# user_is_done_changing = false
 
 until user_command == 3
 
-  puts "\n\nPlease choose an option from below:\n1. View my wine list\n2. Change my wine list\n3. Exit\n\n"
+  puts "\n\nPlease choose an option from below:\n\n1. View my wine list\n2. Change my wine list\n3. Exit\n\n"
 
   user_command = gets.chomp.to_i
 
   if user_command == 1
-    puts "You chose to view the list!"
+    puts "You chose to view the list!\n"
     db_printer(my_log) # Run the printout function for the database made so far
   elsif user_command == 2 # Ask user for more information regarding the wine item
-    puts "You chose to change the list!"
+    puts "You chose to change the list!\n"
     db_printer(my_log)
 
     until user_command == 4
-    puts "\n\nHere are your options:\n1.Add an item\n2.Update an item\n3.Remove an item\n4.Return"
+    puts "\n\nHere are your options:\n\n1. Add an item\n2. Update an item\n3. Remove an item\n4. Return\n\n"
 
     user_command = gets.chomp.to_i
 
-    # FIX: When you update an item once, and then try to change the same item number again, it skips the option to change it and goes to "Here are your options: 1. Add..."
-
       if user_command == 1
-        puts "What year would you like to add?"
+        puts "\nWhat year would you like to add?\n\n"
         new_year = gets.chomp.to_i
-        puts "What grape variety is the wine?"
+        puts "\nWhat grape variety is the wine?\n\n"
         new_variety = gets.chomp
-        puts "What region is the wine from?"
+        puts "\nWhat region is the wine from?\n\n"
         new_region = gets.chomp
-        puts "What tasting notes do you have to add?"
+        puts "\nWhat tasting notes do you have to add?\n\n"
         new_notes = gets.chomp
-        # p [new_year, new_variety, new_region, new_notes]
-        # Run some sort of INSERT function here...
+        # p [new_year, new_variety, new_region, new_notes] <-- Test code
+        # Run some sort of INSERT function here... <-- Pseudocode
         db_adder(my_log,new_year,new_variety,new_region,new_notes)
 
       elsif user_command == 2
-        puts "Which item number do you want to update?"
+        puts "\nWhich Item Number do you want to update?\n\n"
         updated_item_no = gets.chomp.to_i
-        puts "OK. You have chosen to update Item #{updated_item_no}..."
+        puts "\nOK. You have chosen to update Item #{updated_item_no}...\n\n"
 
         # Now creating a sub-menu where we can change the attribute of a given row/item specifically....
 
-        until user_command == 5
-          puts "\n\nWhat value do you want to update?\n1.Year\n2.Variety\n3.Geography\n4.Notes\n5.Return"
+        until user_command == 5  # Adding a series of SQL update functions:
+          puts "\n\Which value for Item #{updated_item_no} would you like to update?\n\n1. Year\n2. Variety\n3. Region\n4. Notes\n5. Return\n\n"
 
-          updated_item_value = gets.chomp # NOTE: this is a string... Update?
+          updated_item_value = gets.chomp # Note that this is a string...OK?
 
           if updated_item_value == ("1" || "Year" || "year")
-            puts "What do you want to change Year to?"
+            puts "\nWhat do you want to change Year to?\n\n"
             my_updated_year = gets.chomp
             db_update_item_year(my_log,my_updated_year,updated_item_no)
-            puts "You have successfully changed the year."
-            # user_is_done_changing == false
+            puts "\nYou have successfully changed the year.\n\n"
 
           elsif updated_item_value == ("2" || "Variety" || "variety")
-            puts "What do you want to change Variety to?"
+            puts "\nWhat do you want to change Variety to?\n\n"
             my_updated_variety = gets.chomp
             db_update_item_variety(my_log,my_updated_variety,updated_item_no)
-            puts "You have changed the variety."
+            puts "\nYou have changed the variety.\n\n"
 
           elsif updated_item_value == ("3" || "Geography" || "geography")
-            puts "What do you want to change Region to?"
+            puts "\nWhat do you want to change Region to?\n\n"
             my_updated_region = gets.chomp
             db_update_item_region(my_log,my_updated_region,updated_item_no)
-            puts "You have changed the region or geography."
-            # user_is_done_changing == false
+            puts "\nYou have changed the regional geography.\n\n"
 
           elsif updated_item_value == ("4" || "Notes" || "notes")
-            puts "What do you want to change Notes to?"
+            puts "\nWhat do you want to change Notes to?\n\n"
             my_updated_notes = gets.chomp
             db_update_item_notes(my_log,my_updated_notes,updated_item_no)
-            puts "You have changed the notes."
-            # user_is_done_changing == false
+            puts "\nYou have changed the notes.\n\n"
 
           elsif updated_item_value == ("5" || "Return" || "return")
-            # user_is_done_changing == false
             break
           else
-            puts "I didn't get that--"
-            # user_is_done_changing == false
+            puts "\nI didn't get that...\n\n"
           end
-
-          # puts "Are you done updating item (Y/N)?"
-          #
-          # if gets.chomp.upcase == ("Y" || "YES")
-          #   user_is_done_changing = true
-          # else
-          #   user_is_done_changing = false
-          # end
-          #
-          # puts "Are you done with your changes (Y/N)?"
-          #
-          # if gets.chomp.upcase == ("Y" || "YES")
-          #   user_is_done_final = true
-          # else
-          #   user_is_done_final = false
-          # end
-          # p updated_item_no
-          # ENDING THE UNTIL LOOP
         end
-        # Run some sort of UPDATE function here...
-        # p [updated_item_no,updated_item_value]
 
       elsif user_command == 3
-        puts "Which item would you like to delete?"
+        puts "\nWhich item would you like to delete?\n\n"
         deleted_item_no = gets.chomp.to_i
-        puts "OK. Item #{deleted_item_no} has been deleted!"
+        puts "\nOK. Item #{deleted_item_no} has been deleted!\n"
         # Run some sort of DELETE function here...
         db_deleter(my_log,deleted_item_no)
 
@@ -191,22 +163,28 @@ until user_command == 3
         break
 
       else
-        puts "I didn't get that..."
+        puts "\nI didn't get that...\n\n" # <-- For error scenariors
       end
 
       end
 
   elsif user_command == 3
     puts "\nGoodbye!\n"
-    # user_is_done_final = true
 
   else
-    puts "I didn't quite understand that..."
+    puts "\nI didn't understand that...\n\n" # <-- For error scenarios
   end
 end
 
-puts "\nThank you for using WineCellar."
+# Making a playful closing message:
+puts "
 
-# Playing around with insertion/deletion:
+  =--------------
+|      |AU    |   \\ ----- =
+|      |REVOIR|     ______ |  Thank you for using WineCellar!
+  _______________ /
 
+"
+
+# Playing around with insertion/deletion: <-- Test code
 # my_log.execute("DELETE FROM wine_cellar WHERE year=2011")
