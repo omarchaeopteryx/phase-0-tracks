@@ -27,22 +27,31 @@ QQQ
 
 # Creating an "add item" function:
 
-def db_adder(database, year, variety, geography, notes)
-  database.execute("INSERT INTO wine_cellar (year,variety,region,notes) VALUES (?,?,?,?)", [year,variety,geography,notes])
+def db_adder(database, year, variety, region, notes)
+  database.execute("INSERT INTO wine_cellar (year,variety,region,notes) VALUES (?,?,?,?)", [year,variety,region,notes])
 end
 
-# Creating an "update value for an item" function:
+# Creating a series of "update value for an item" functions:
 
 def db_updater_item_year(database,updated_year,item_id)
-  execution_code = "UPDATE wine_cellar SET year=#{updated_year} WHERE id=#{item_id}"
+  execution_code = "UPDATE wine_cellar SET year=#{updated_year} WHERE id=#{item_id}" # REFACTOR: The only thing changing in this list is the updated_* code bit!
   database.execute(execution_code)
 end
 
-# OLD
-# def db_updater(database, id, col_name,col_value)
-#
-#   database.execute("UPDATE wine_cellar SET")
-# end
+def db_update_item_variety(database,updated_variety,item_id)
+  execution_code = "UPDATE wine_cellar SET year=#{updated_variety} WHERE id=#{item_id}"
+  database.execute(execution_code)
+end
+
+def db_update_item_region(database,updated_region,item_id)
+  execution_code = "UPDATE wine_cellar SET year=#{updated_region} WHERE id=#{item_id}"
+  database.execute(execution_code)
+end
+
+def db_update_item_notes(database,updated_notes,item_id)
+  execution_code = "UPDATE wine_cellar SET year=#{updated_notes} WHERE id=#{item_id}"
+  database.execute(execution_code)
+end
 
 # Creating a "remove item" function:
 
@@ -70,7 +79,7 @@ user_command = nil
 user_is_done_final = false
 user_is_done_changing = false
 
-until user_is_done_final == true
+until user_command == 3
 
   puts "\n\nPlease choose an option from below:\n1. View my wine list\n2. Change my wine list\n3. Exit"
 
@@ -83,7 +92,7 @@ until user_is_done_final == true
     puts "You chose to change the list!"
     db_printer(my_log)
 
-    until
+    until user_command == 4
     puts "\n\nHere are your options:\n1.Add an item\n2.Update an item\n3.Remove an item\n4.Return"
 
     user_command = gets.chomp.to_i
@@ -110,7 +119,7 @@ until user_is_done_final == true
 
         # Now creating a sub-menu where we can change the attribute of a given row/item specifically....
 
-        until user_is_done_changing == true
+        until user_command == 5
           puts "\n\nWhat value do you want to update?\n1.Year\n2.Variety\n3.Geography\n4.Notes\n5.Return"
 
           updated_item_value = gets.chomp
@@ -141,14 +150,22 @@ until user_is_done_final == true
             user_is_done_changing == false
           end
 
-          puts "Are you done updating (Y/N)?"
-
-          if gets.chomp.upcase == ("Y" || "YES")
-            user_is_done_changing = true
-          else
-            user_is_done_changing = false
-          end
-          p updated_item_no
+          # puts "Are you done updating item (Y/N)?"
+          #
+          # if gets.chomp.upcase == ("Y" || "YES")
+          #   user_is_done_changing = true
+          # else
+          #   user_is_done_changing = false
+          # end
+          #
+          # puts "Are you done with your changes (Y/N)?"
+          #
+          # if gets.chomp.upcase == ("Y" || "YES")
+          #   user_is_done_final = true
+          # else
+          #   user_is_done_final = false
+          # end
+          # p updated_item_no
           # ENDING THE UNTIL LOOP
         end
         # Run some sort of UPDATE function here...
@@ -171,7 +188,7 @@ until user_is_done_final == true
       end
 
   elsif user_command == 3
-    puts "Goodbye!"
+    puts "\nGoodbye!\n"
     user_is_done_final = true
 
   else
@@ -179,7 +196,7 @@ until user_is_done_final == true
   end
 end
 
-puts "Thank you for using WineCellar."
+puts "\nThank you for using WineCellar."
 
 # Playing around with insertion/deletion:
 
