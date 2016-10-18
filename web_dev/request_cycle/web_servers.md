@@ -16,3 +16,7 @@ Answer here
 *Optional bonus question: Why is it considered a bad idea to run programs as the root user on a Linux system?*
 
 Answer here
+
+### Find the thing, continued
+
+*What are five Chrome DOM properties to explore because you have a hunch or are curious about what they do?*
