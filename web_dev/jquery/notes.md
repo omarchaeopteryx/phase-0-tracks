@@ -12,4 +12,8 @@ I'll be sure to take a break in between. I work well by setting a timer and stop
 
 *Note that this is based on what we have learned in this course so far, in addition to my own knowledge of my style.*
 
+## Afterword
+
+I found a couple resources to be the most useful after exploring the concept initially. The W3C website has a nice "cheat-sheet" way of listing selectors, and this was useful for helping me understand the patterns and the syntax. In addition, I felt gratified when I could try it for myself in an editor (big help!). I also watched a short YouTube video at the end that was very helpful. 
+
 ***
