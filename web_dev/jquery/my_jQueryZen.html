@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>jQuery Zen</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js">
+    </script>
+  </head>
+  <body>
+  <h1>jQuery Zen</h1>
+  <p>Where is my mind?</p>
+  <p>Is it over here?</p>
+  <p>Is it over there?</p>
+  <button class="clickme">Is it here?</button>
+  </body>
+
+  <script>
+
+  $(document).ready(function() {
+
+      // Testing out some font stylings...
+      $("*").css("textAlign","center")
+      $("*").css("background-color","eggshell");
+      $("html").css("fontFamily","Georgia");
+      $("p").css("fontSize","3em");
+      $(".clickme").css("fontSize","2em");
+
+      // Adding some fading functions...
+      $("button").click(function(){
+        $("body:first-of-type").fadeOut(
+          "slow",function() {
+        // Remove the title...
+        });
+      });
+
+      $("p").mouseover(function() {
+        $("p:hover").fadeOut(
+          "slow",function() {
+        // Read-out results!
+        });
+      });
+
+      $("p").mouseleave(function() {
+        $("p:hover").fadeIn(
+          "slow",function() {
+        // Read-out results!
+        });
+      });
+
+    });
+
+  </script>
+</html>
