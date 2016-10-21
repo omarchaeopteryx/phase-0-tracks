@@ -8,7 +8,7 @@ db.results_as_hash = true
 # write a basic GET route
 # add a query parameter
 # GET /
-get '/' do
+get '/' do  # Note to self: visit http://localhost:9393/?name=Yunus&age=55
   "#{params[:name]} is #{params[:age]} years old."
 end
 
@@ -45,14 +45,14 @@ get '/students/:id' do
   student.to_s
 end
 
-# Me: adding a "contact" page that sends information:
+# NEWs: Adding a "contact" page that sends information:
 get '/contact' do  # Note to self: that it's reading break code as HTML, not Ruby (i.e., you don't do \n but rather <br>)
-  address = "<h4>Our Address:</h4><p>1600 J St., Suite A,</br>Washington, DC,</br>USA</p>"
+  address = "<h4>Our Address:</h4><p>1600 J St., Suite A,</br>Washington, DC,</br>USA</p><iframe src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3104.989759451291!2d-77.03859778958464!3d38.90134949421302!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b7b7be81a5f503%3A0xa56258cd2bbc2c57!2sDowntown%2C+Washington%2C+DC+20005!5e0!3m2!1sen!2sus!4v1477010035702' width='300' height='225' frameborder='0' style='border:0'></iframe>"
   return address
 end
 
-# Me: Adding a query parameter and a conditional statment that works if the user has not inputted a name at all yet
-# Try putting this into the browser: localhost:9393/great_job?person=Moi
+# NEW: Adding a query parameter and a conditional statment that works if the user has not inputted a name at all yet
+# Try putting this into the browser: localhost:9393/great_job?good_person=Moi
 get '/great_job' do
   p params[:good_person]
   if params[:good_person]
@@ -61,4 +61,13 @@ get '/great_job' do
     result = "Good job!"
   end
   return result
+end
+
+# NEW: Adding a way to add two values and return the result:
+get '/:first/plus/:second' do
+  first_value = params[:first]; second_value = params[:second]
+  total_value = (first_value.to_i + second_value.to_i) # <-- ii. But this did
+  # total_value = first_value + second_value <-- i. This didn't work...
+  "#{params[:first]} plus #{params[:second]}
+  <br><br>equals<br><br>#{total_value}"
 end
