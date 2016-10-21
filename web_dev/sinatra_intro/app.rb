@@ -46,7 +46,19 @@ get '/students/:id' do
 end
 
 # Me: adding a "contact" page that sends information:
-get '/contact' do  # NOTE that it's reading break code as HTML, not Ruby (i.e., you don't do \n but rather <br>)
+get '/contact' do  # Note to self: that it's reading break code as HTML, not Ruby (i.e., you don't do \n but rather <br>)
   address = "<h4>Our Address:</h4><p>1600 J St., Suite A,</br>Washington, DC,</br>USA</p>"
   return address
+end
+
+# Me: Adding a query parameter and a conditional statment that works if the user has not inputted a name at all yet
+# Try putting this into the browser: localhost:9393/great_job?person=Moi
+get '/great_job' do
+  p params[:good_person]
+  if params[:good_person]
+    result =  "Great job, #{params[:good_person]}!"
+  else
+    result = "Good job!"
+  end
+  return result
 end
