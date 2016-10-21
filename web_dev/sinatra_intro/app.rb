@@ -71,3 +71,23 @@ get '/:first/plus/:second' do
   "#{params[:first]} plus #{params[:second]}
   <br><br>equals<br><br>#{total_value}"
 end
+
+# OPTIONAL BONUS: Make a way to search/query the database
+# RETURN TO THIS
+get '/query' do
+  my_query = params[:query_name] # So user can input ?query_name=
+  students = db.execute("SELECT * FROM students WHERE name=#{my_query}")
+  return students
+end
+
+# RESEARCH:
+
+# 1. Is Sinatra the only Ruby library?
+# No, there are other libraries out there. A popular one, for example, is Rails.
+# Other names appearing in my searches are Lotus, Cuba, Padrino. See more at: https://blog.codeship.com/a-survey-of-non-rails-frameworks-in-ruby-cuba-sinatra-padrino-lotus/
+
+# 2. What are other database options besides sqlite3?
+# There are other relational databses out there available in gems, such as the MySQL gem, `mysql2`, and the PostgreSQL gem, `pg`.
+
+# 3. What is meant by Web Stack?
+# The phrase "Web stack" referes to the whole suite of software required to get a viable website up and running, including, but not limited to: the source code for the operating system, the database code, the web hosting services. E.g., the collection of tools we used to get the Ruby Web App up and running in DBC!
