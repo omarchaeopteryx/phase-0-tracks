@@ -44,3 +44,9 @@ get '/students/:id' do
   student = db.execute("SELECT * FROM students WHERE id=?", [params[:id]])[0]
   student.to_s
 end
+
+# Me: adding a "contact" page that sends information:
+get '/contact' do  # NOTE that it's reading break code as HTML, not Ruby (i.e., you don't do \n but rather <br>)
+  address = "<h4>Our Address:</h4><p>1600 J St., Suite A,</br>Washington, DC,</br>USA</p>"
+  return address
+end
